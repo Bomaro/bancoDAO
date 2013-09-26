@@ -11,6 +11,9 @@ public class Carro {
 		setDescricao(descricao);
 		setCor(cor);
 	}
+	public Carro() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getDescricao() {
 		return descricao;
 	}

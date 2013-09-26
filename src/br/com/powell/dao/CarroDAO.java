@@ -1,5 +1,7 @@
 package br.com.powell.dao;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -53,6 +55,33 @@ public class CarroDAO extends AbstractDAO{
 		}catch(Exception e){
 			return false;
 		}
+	}
+
+	public ArrayList<Carro> retornaTodosOsCarros() {
+
+		Cursor cursorComTodosOsCarros = retornaBancoParaLeitura().query(ConstantsUtils.TABELA_CARRO, null, null, null, 
+				null, null, null);
+		cursorComTodosOsCarros.moveToFirst();
+		ArrayList<Carro> carros = new ArrayList<Carro>();
+		
+		try{
+			do{
+				carros.add(montaCarroPelo(cursorComTodosOsCarros));
+			}while(cursorComTodosOsCarros.moveToNext());
+		}catch(Exception e){
+			carros = new ArrayList<Carro>();
+		}
+		fechaCursor(cursorComTodosOsCarros);
+		return carros;
+	}
+
+	private Carro montaCarroPelo(Cursor cursorComTodosOsCarros) {
+
+		Carro carro = new Carro();
+		carro.setCor(cursorComTodosOsCarros.getString(cursorComTodosOsCarros.getColumnIndex(ConstantsUtils.CARRO_COR)));
+		carro.setDescricao(cursorComTodosOsCarros.getString(cursorComTodosOsCarros.getColumnIndex(ConstantsUtils.CARRO_DESCRICAO)));
+		carro.setId(cursorComTodosOsCarros.getLong(cursorComTodosOsCarros.getColumnIndex(ConstantsUtils.CARRO_ID)));
+		return carro;
 	}
 
 }

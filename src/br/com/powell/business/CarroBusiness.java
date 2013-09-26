@@ -1,5 +1,7 @@
 package br.com.powell.business;
 
+import java.util.ArrayList;
+
 import br.com.powell.dao.CarroDAO;
 import br.com.powell.model.Carro;
 import android.content.Context;
@@ -23,6 +25,10 @@ public class CarroBusiness {
 
 	public void fechaBanco() {
 		carroDAO.fechaBanco();
+	}
+
+	public ArrayList<Carro> retornaTodosCarros() {
+		return carroDAO.retornaTodosOsCarros();
 	}
 
 }
